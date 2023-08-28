@@ -1,0 +1,29 @@
+{
+  "name": "shelf-desktop-apps",
+  "author": "shelf.nu",
+  "sideEffects": false,
+  "scripts": {
+    "build:mac": "cd src/ && node build.js --mac",
+    "build:windows": "cd src/ && node build.js --windows"
+  },
+  "prettier": {},
+  "dependencies": {
+    "@electron/osx-sign": "^1.0.5",
+    "@esm2cjs/execa": "^6.1.1-cjs.1",
+    "electron-installer-dmg": "^4.0.0",
+    "electron-winstaller": "^5.1.0"
+  },
+  "devDependencies": {
+    "nativefier": "^51.0.1"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "prisma": {
+    "schema": "app/database/schema.prisma",
+    "seed": "ts-node --require tsconfig-paths/register app/database/seed.server.ts"
+  },
+  "optionalDependencies": {
+    "appdmg": "^0.6.6"
+  }
+}

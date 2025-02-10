@@ -25,6 +25,11 @@ async function buildMac() {
         "--icon", `${APP_ICON}.png`,
         "--platform", "osx",
         "--arch", "universal",
+        /**
+         * We have to manually adjust the scrollbar because Electron uses webview to render the webapp 
+         * and webview has some defaults which prevents the `scrollbar: auto`.
+         */
+        "--inject", "./scroll-fix.css"
       ],
       { env: { NATIVEFIER_APPS_DIR } }
     );

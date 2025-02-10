@@ -25,6 +25,11 @@ async function buildMac() {
         "--icon", `${APP_ICON}.png`,
         "--platform", "osx",
         "--arch", "universal",
+        /**
+         * We have to manually adjust the scrollbar because Electron uses webview to render the webapp 
+         * and webview has some defaults which prevents the `scrollbar: auto`.
+         */
+        "--inject", "./scroll-fix.css"
       ],
       { env: { NATIVEFIER_APPS_DIR } }
     );
@@ -58,7 +63,12 @@ async function buildWindows() {
         URL,
         "--name", APP_NAME,
         "--icon", `${APP_ICON}.ico`,
-        "--platform", "windows"
+        "--platform", "windows",
+        /**
+         * We have to manually adjust the scrollbar because Electron uses webview to render the webapp 
+         * and webview has some defaults which prevents the `scrollbar: auto`.
+         */
+        "--inject", "./scroll-fix.css"
       ],
       { env: { NATIVEFIER_APPS_DIR } }
     );
@@ -85,12 +95,12 @@ async function buildWindows() {
     fs.readdir(INSTALL_DIR, (err, files) => {
       if (err) throw err;
       for (const file of files) {
-        if(path.extname(file) !== '.exe') {
+        if (path.extname(file) !== '.exe') {
           fs.unlink(path.join(INSTALL_DIR, file), err => {
             if (err) throw err;
           });
         }
       }
     });
-  } 
+  }
 })();

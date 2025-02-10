@@ -59,6 +59,10 @@ async function buildWindows() {
         "--name", APP_NAME,
         "--icon", `${APP_ICON}.ico`,
         "--platform", "windows",
+        /**
+         * We have to manually adjust the scrollbar because Electron uses webview to render the webapp 
+         * and webview has some defaults which prevents the `scrollbar: auto`.
+         */
         "--inject", "./scroll-fix.css"
       ],
       { env: { NATIVEFIER_APPS_DIR } }

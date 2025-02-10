@@ -58,7 +58,8 @@ async function buildWindows() {
         URL,
         "--name", APP_NAME,
         "--icon", `${APP_ICON}.ico`,
-        "--platform", "windows"
+        "--platform", "windows",
+        "--inject", "./scroll-fix.css"
       ],
       { env: { NATIVEFIER_APPS_DIR } }
     );
@@ -85,12 +86,12 @@ async function buildWindows() {
     fs.readdir(INSTALL_DIR, (err, files) => {
       if (err) throw err;
       for (const file of files) {
-        if(path.extname(file) !== '.exe') {
+        if (path.extname(file) !== '.exe') {
           fs.unlink(path.join(INSTALL_DIR, file), err => {
             if (err) throw err;
           });
         }
       }
     });
-  } 
+  }
 })();
